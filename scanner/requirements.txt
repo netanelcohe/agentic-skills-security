@@ -1,0 +1,2 @@
+# No external dependencies required.
+# The scanner uses only Python 3 standard library (re, base64, os, sys, json, argparse).
