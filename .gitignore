@@ -1,2 +1,4 @@
 -e __pycache__/
 *.pyc
+*:Zone.Identifier
+*.Identifier
