@@ -22,18 +22,18 @@ Research exercise: understanding how agentic skills can be abused, and how those
 │   ├── scanner_test.py
 │   └── requirements.txt
 ├── skills/
-│   ├── benign/
-│   │   ├── git-commit-helper/
-│   │   ├── docker-cleanup/
-│   │   ├── log-rotate/
-│   │   ├── python-venv-setup/
-│   │   ├── disk-usage-report/
-│   │   ├── ssl-cert-check/
-│   │   ├── cron-lister/
-│   │   ├── system-info/
-│   │   ├── file-search/
-│   │   └── markdown-toc/
-│   └── malicious/
+│   ├── benign/                 # 10 skills collected from public GitHub repos
+│   │   ├── agentregistry/
+│   │   ├── ai-trending-news/
+│   │   ├── gcp-agent-first-workflows/
+│   │   ├── github-trending/
+│   │   ├── grok-persistent-state/
+│   │   ├── mcp-openclaw-bridge/
+│   │   ├── microsoft-nonprofit-offers/
+│   │   ├── openclaw-backup-restore/
+│   │   ├── skillmaru/
+│   │   └── smithery-mcp-orchestrator/
+│   └── malicious/              # 3 skills authored for this exercise
 │       ├── log-cleanup-helper/
 │       ├── dependency-doctor/
 │       └── api-docs-assistant/
@@ -47,7 +47,7 @@ Research exercise: understanding how agentic skills can be abused, and how those
 ```bash
 cd scanner
 python3 scanner.py --dir ../skills/benign      # Should all pass as Benign
-python3 scanner.py --dir ../skills/malicious    # Should flag Malicious or Suspicious
+python3 scanner.py --dir ../skills/malicious    # Should flag Malicious
 ```
 
 ### 2. Run against a single skill
@@ -66,15 +66,15 @@ Runs the scanner against all 13 skills (10 benign + 3 malicious) and reports pas
 
 ### 4. Load skills in Antigravity (optional)
 
-Copy the skills into an Antigravity project's `.agents/skills/` directory. Ask the agent "What skills are available?" to confirm they are loaded. Skills can be triggered via natural language prompts matching their description field.
+Copy the skills into an Antigravity project's `.agents/skills/` directory. Ask the agent "What skills are available?" to confirm they are loaded.
 
 ### 5. Runtime observation
 
-For each malicious skill, runtime signals are documented in the report. The bundled script in `dependency-doctor` can be observed directly:
+For each malicious skill, runtime signals are documented in the report. The bundled script in `dependency-doctor` can be inspected directly:
 
 ```bash
-# Decode the payload (do NOT execute)
+# Decode the hidden payload (do NOT execute)
 grep CACHE_SEED skills/malicious/dependency-doctor/scripts/fix_env.sh | cut -d'"' -f2 | base64 -d
 ```
 
-**Safety:** Run all malicious skills only in an isolated environment. Do not publish to ClawHub or any registry.
+**Safety:** Do not publish these skills to ClawHub or any other registry.

@@ -196,16 +196,28 @@ def check_suspicious_urls(text):
             text, re.IGNORECASE | re.MULTILINE
         ))
         if in_instruction:
-            unique_domains = set()
-            for url in urls:
-                domain = re.match(r'https?://([^/\s]+)', url)
-                if domain:
-                    unique_domains.add(domain.group(1))
-            findings.append((
-                "SUSPICIOUS",
-                f"External URLs referenced in executable instructions: "
-                f"{', '.join(sorted(unique_domains))}"
-            ))
+            # Context-aware URL analysis: only flag URLs used in
+            # fetch-to-disk or fetch-and-pipe patterns, not documentation references.
+            # A URL in "see https://..." is informational.
+            # A URL in "curl -o /tmp/x https://..." is actionable and worth flagging.
+            fetch_url_patterns = [
+                r'(?:curl|wget)\s+[^|]*?(https?://(?!localhost|127\.0\.0\.1)\S+)',
+                r'(?:curl|wget)\s+.*?(?:-o|-O|>)\s*\S+.*?(https?://\S+)',
+                r'(?:curl|wget)\s+.*?(https?://\S+).*?\|\s*(?:bash|sh|python|eval)',
+            ]
+            fetched_domains = set()
+            for pattern in fetch_url_patterns:
+                for match in re.finditer(pattern, text, re.IGNORECASE):
+                    url = match.group(1)
+                    domain = re.match(r'https?://([^/\s]+)', url)
+                    if domain:
+                        fetched_domains.add(domain.group(1))
+            if fetched_domains:
+                findings.append((
+                    "SUSPICIOUS",
+                    f"URLs used in fetch/download commands: "
+                    f"{', '.join(sorted(fetched_domains))}"
+                ))
 
     return findings
 

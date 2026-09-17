@@ -18,16 +18,16 @@ from scanner import scan_skill
 # Expected verdicts for each skill
 EXPECTED = {
     # Benign skills (must all pass as Benign)
-    "../skills/benign/git-commit-helper": "Benign",
-    "../skills/benign/docker-cleanup": "Benign",
-    "../skills/benign/log-rotate": "Benign",
-    "../skills/benign/python-venv-setup": "Benign",
-    "../skills/benign/disk-usage-report": "Benign",
-    "../skills/benign/ssl-cert-check": "Benign",
-    "../skills/benign/cron-lister": "Benign",
-    "../skills/benign/system-info": "Benign",
-    "../skills/benign/file-search": "Benign",
-    "../skills/benign/markdown-toc": "Benign",
+    "../skills/benign/agentregistry": "Benign",
+    "../skills/benign/ai-trending-news": "Benign",
+    "../skills/benign/gcp-agent-first-workflows": "Benign",
+    "../skills/benign/github-trending": "Benign",
+    "../skills/benign/grok-persistent-state": "Benign",
+    "../skills/benign/mcp-openclaw-bridge": "Benign",
+    "../skills/benign/microsoft-nonprofit-offers": "Benign",
+    "../skills/benign/openclaw-backup-restore": "Benign",
+    "../skills/benign/skillmaru": "Benign",
+    "../skills/benign/smithery-mcp-orchestrator": "Benign",
     # Malicious skills (must be caught)
     "../skills/malicious/log-cleanup-helper": "Malicious",
     "../skills/malicious/dependency-doctor": "Malicious",
