@@ -133,3 +133,14 @@ This creates a persistent, real-time exfiltration channel that requires no furth
 - Flag subscription filters with pattern matches on sensitive keywords (password, token, secret, Authorization). Legitimate log forwarding for monitoring or compliance rarely needs these specific patterns forwarded cross-account.
 - Audit all CloudWatch subscription filters periodically. Each log group supports a limited number of subscription filters (currently 2), so a malicious filter may also block legitimate ones from being added, which can serve as a secondary detection signal.
 - Compare subscription filters against IaC-provisioned configuration. A filter that exists in CloudWatch but not in Terraform/CloudFormation state is a strong indicator of unauthorized manual creation.
+
+---
+
+## References
+
+- AWS Service Authorization Reference (actions, resources, condition keys): https://docs.aws.amazon.com/service-authorization/latest/reference/
+- CloudTrail management events vs data events: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html
+- ECR Repository Policies: https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html
+- Route53 Resolver Forwarding Rules: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-forwarding-outbound-queries.html
+- CloudWatch Logs Subscription Filters: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html
+- VPC Flow Logs: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html

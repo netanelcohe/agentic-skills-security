@@ -78,3 +78,11 @@ grep CACHE_SEED skills/malicious/dependency-doctor/scripts/fix_env.sh | cut -d'"
 ```
 
 **Safety:** Do not publish these skills to ClawHub or any other registry.
+
+## AWS Exfiltration (Bonus)
+
+See [bonus.md](bonus.md) for three distinct AWS exfiltration techniques targeting different layers of the cloud-native stack:
+
+1. **ECR repo policy manipulation** - container supply chain (build artifact exfiltration)
+2. **Route53 Resolver DNS forwarding** - networking (passive internal architecture reconnaissance)
+3. **CloudWatch cross-account log subscription** - observability (runtime secrets exfiltration)
